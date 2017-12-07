@@ -1,7 +1,8 @@
 import React from 'react';
+import NavBar from '../components/NavBar';
 
 const App = () => (
-  <h1>Hola amigos</h1>
+  <NavBar />
 );
 
 export default App;
