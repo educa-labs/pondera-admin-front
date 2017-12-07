@@ -1,3 +1,6 @@
-const rootReducer = (state = '', action) => state;
+import { combineReducers } from 'redux';
+import selections from './selections';
 
-export default rootReducer;
+export default combineReducers({
+  selections,
+});
