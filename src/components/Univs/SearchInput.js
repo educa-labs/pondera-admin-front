@@ -1,4 +1,6 @@
 import React from 'react';
+import afterTyping from '../hoc/afterTyping';
+
 
 const SearchInput = ({ value, onChange }) => (
   <div className="panel-block">
@@ -17,5 +19,5 @@ const SearchInput = ({ value, onChange }) => (
   </div>
 );
 
-export default SearchInput;
+export default afterTyping(SearchInput);
 
