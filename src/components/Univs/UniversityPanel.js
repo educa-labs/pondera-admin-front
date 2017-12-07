@@ -6,27 +6,48 @@ import SearcInput from './SearchInput';
 import List from './List';
 
 
-const univs = [
-  { id: 1, title: 'PUC' },
-  { id: 2, title: 'Universidad Central ' },
-  { id: 3, title: 'Universidad Gabriela Mistral' },
-]
-
 class UniversityPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: '',
+      value: '',
+      filteredUnivs: props.univs,
+      timeout: null,
     };
     this.onItemClick = this.onItemClick.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.applyFilter = this.applyFilter.bind(this);
   }
 
   onItemClick(id) {
     this.props.dispatch(toggleSelection(id))
   }
+
+  applyFilter() {
+    const { value } = this.state;
+    const { univs } = this.props;
+    if (value.length > 2) {
+      const filteredUnivs = univs.filter(uni => is.include(uni.title.toLowerCase(), value));
+      this.setState({
+        filteredUnivs,
+      })
+    } else {
+      this.setState({
+        filteredUnivs: [...univs],
+      })
+    }
+  }
+
+  onInputChange(ev) {
+    clearTimeout(this.state.timeout);
+    this.setState({
+      value: ev.target.value,
+      timeout: setTimeout(this.applyFilter, 500),
+    })
+  }
   
   render() {
-    const { input } = this.state;
+    const { value, filteredUnivs } = this.state;
     const { selections } = this.props;
     return (
       <div className="panel">
@@ -34,11 +55,11 @@ class UniversityPanel extends Component {
           Universidades
         </p>
         <SearcInput
-          value={this.state.input}
-          onChange={(ev) => { this.setState({ input: ev.target.value }); }}
+          value={value}
+          onChange={this.onInputChange}
         />
         <List
-          univs={univs}
+          univs={filteredUnivs}
           selections={selections}
           onItemClick={this.onItemClick}
         />
