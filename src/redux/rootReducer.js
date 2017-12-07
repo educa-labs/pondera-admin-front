@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import selections from './selections';
+import filters from './filters';
 
 export default combineReducers({
-  selections,
+  filters,
 });
