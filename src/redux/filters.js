@@ -1,33 +1,23 @@
 import is from 'is_js';
 
 
-const SELECT_UNIVERSITY = 'SELECT_UNIVERSITY';
-const DESELECT_UNIVERSITY = 'DESELECT_UNIVERSITY';
+const TOGGLE_SELECTION = 'TOGGLE_SELECTION';
 
 /* ACTION CREATORS */
 
-export const selectUniversity = id => ({
-  type: SELECT_UNIVERSITY,
-  id,
-})
-
-export const delsectUniversity = id => ({
-  type: DESELECT_UNIVERSITY,
+export const toggleSelection = id => ({
+  type: TOGGLE_SELECTION,
   id,
 })
 
 
 export default (state = [], action) => {
   switch (action.type) {
-    case SELECT_UNIVERSITY:
-      if (is.not.inArray(action.id, state))
-        return [...state, action.id];
-      return state;
-    case DESELECT_UNIVERSITY:
+    case TOGGLE_SELECTION:
       if (is.inArray(action.id, state)) {
         return state.filter(sel => sel !== action.id);
       }
-      return state;
+      return [...state, action.id];
     default:
       return state;
   }
