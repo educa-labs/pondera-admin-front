@@ -1,7 +1,7 @@
 import React, { Component, cloneElement } from 'react';
 
-export default Input => (
-  class Input extends Component {
+export default Target => (
+  class AfterTypingInput extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -21,11 +21,11 @@ export default Input => (
 
     render() {
       return (
-        <Input
+        <Target
           onChange={this.handleOnChange}
           value={this.props.value}
         />
-      )
+      );
     }
   }
 );

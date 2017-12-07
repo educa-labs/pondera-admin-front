@@ -12,15 +12,13 @@ class UniversityPanel extends Component {
     this.state = {
       value: '',
       filteredUnivs: props.univs,
-      timeout: null,
     };
     this.onItemClick = this.onItemClick.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
     this.applyFilter = this.applyFilter.bind(this);
   }
 
   onItemClick(id) {
-    this.props.dispatch(toggleSelection(id))
+    this.props.dispatch(toggleSelection(id));
   }
 
   applyFilter() {
@@ -34,18 +32,10 @@ class UniversityPanel extends Component {
     } else {
       this.setState({
         filteredUnivs: [...univs],
-      })
+      });
     }
   }
 
-  onInputChange(ev) {
-    clearTimeout(this.state.timeout);
-    this.setState({
-      value: ev.target.value,
-      timeout: setTimeout(this.applyFilter, 500),
-    })
-  }
-  
   render() {
     const { value, filteredUnivs } = this.state;
     const { selections } = this.props;
@@ -56,7 +46,9 @@ class UniversityPanel extends Component {
         </p>
         <SearcInput
           value={value}
-          onChange={this.onInputChange}
+          onChange={ev => this.setState({ value: ev.target.value })}
+          afterTyping={this.applyFilter}
+          time={500}
         />
         <List
           univs={filteredUnivs}
@@ -69,5 +61,5 @@ class UniversityPanel extends Component {
 }
 
 export default connect(state => ({
-  selections: state.filters
+  selections: state.filters,
 }))(UniversityPanel);

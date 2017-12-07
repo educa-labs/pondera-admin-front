@@ -13,7 +13,7 @@ const SearchInput = ({ value, onChange }) => (
         placeholder="Busca una universidad"
       />
       <span className="icon is-left">
-        <i className="fa fa-search"></i>
+        <i className="fa fa-search" />
       </span>
     </p>
   </div>
