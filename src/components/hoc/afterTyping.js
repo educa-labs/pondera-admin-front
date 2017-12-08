@@ -1,31 +1,46 @@
-import React, { Component, cloneElement } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default Target => (
+
+export default (Target) => {
   class AfterTypingInput extends Component {
     constructor(props) {
       super(props);
       this.state = {
         timeout: null,
-      }
+      };
       this.handleOnChange = this.handleOnChange.bind(this);
     }
 
     handleOnChange(ev) {
-      const { onChange, afterTyping, time} = this.props;
-      onChange(ev);
-      clearTimeout(this.state.timeout);
-      this.setState({
-        timeot: setTimeout(afterTyping, time),
+      this.props.onChange(ev);
+      this.setState((state, props) => {
+        clearTimeout(state.timeout);
+        return {
+          timeout: setTimeout(props.afterTyping, props.time),
+        };
       });
     }
 
     render() {
+      const {
+        onChange, afterTyping, time, ...rest
+      } = this.props;
       return (
-        <Target
-          onChange={this.handleOnChange}
-          value={this.props.value}
-        />
+        <Target onChange={this.handleOnChange} {...rest} />
       );
     }
   }
-);
+
+  AfterTypingInput.defaultProps = {
+    time: 500,
+  };
+
+  AfterTypingInput.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    afterTyping: PropTypes.func.isRequired,
+    time: PropTypes.number,
+  };
+
+  return AfterTypingInput;
+};
