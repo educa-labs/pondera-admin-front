@@ -3,42 +3,32 @@ import { connect } from 'react-redux';
 import is from 'is_js';
 import { toggleSelection } from '../../redux/filters';
 import SearcInput from './SearchInput';
-import List from './List';
+import UnivItem from './UnivItem';
+import FilteredList from '../FilteredList';
 
+const updateFilter = state => ({
+  value: state.value,
+  filter: state.value,
+});
 
 class UniversityPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: '',
-      filteredUnivs: props.univs,
+      filter: '',
     };
     this.onItemClick = this.onItemClick.bind(this);
-    this.applyFilter = this.applyFilter.bind(this);
   }
 
   onItemClick(id) {
     this.props.dispatch(toggleSelection(id));
   }
 
-  applyFilter() {
-    const { value } = this.state;
-    const { univs } = this.props;
-    if (value.length > 2) {
-      const filteredUnivs = univs.filter(uni => is.include(uni.title.toLowerCase(), value));
-      this.setState({
-        filteredUnivs,
-      })
-    } else {
-      this.setState({
-        filteredUnivs: [...univs],
-      });
-    }
-  }
 
   render() {
-    const { value, filteredUnivs } = this.state;
-    const { selections } = this.props;
+    const { value, filter } = this.state;
+    const { selections, univs } = this.props;
     return (
       <div className="panel">
         <p className="panel-heading">
@@ -47,14 +37,19 @@ class UniversityPanel extends Component {
         <SearcInput
           value={value}
           onChange={ev => this.setState({ value: ev.target.value })}
-          afterTyping={this.applyFilter}
+          afterTyping={() => this.setState(updateFilter)}
           time={500}
         />
-        <List
-          univs={filteredUnivs}
-          selections={selections}
-          onItemClick={this.onItemClick}
-        />
+        <FilteredList filter={filter}>
+          {univs.map(univ => (
+            <UnivItem
+              key={univ.id}
+              label={univ.title}
+              selected={is.inArray(univ.id, selections)}
+              onClick={() => this.onItemClick(univ.id)}
+            />
+          ))}
+        </FilteredList>
       </div>
     );
   }
