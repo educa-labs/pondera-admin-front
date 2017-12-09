@@ -1,12 +1,12 @@
 import React from 'react';
 
-const CareerItem = ({ career }) => (
-  <div className="box">
-    <div className="level">
+const CareerItem = ({ career, onClick, selected }) => (
+  <div className={`box box-hoverable ${selected ? 'box-selected' : ''}`}>
+    <div className="level" onClick={onClick}>
       <div className="level-left">
-        <div className="level-item">
-          <a className="button is-primary is-outlined">Agregar</a>
-        </div>
+        {/* <div className="level-item">
+          <a onClick={onClick} className="button is-primary is-outlined">Agregar</a>
+        </div> */}
         <div className="level-item">
           <div>
             <p className="heading">{career.uTitle}</p>

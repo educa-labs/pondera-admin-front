@@ -6,7 +6,7 @@ import reducer from './rootReducer';
 
 function configureStore() {
   const middlewares = [thunkMiddleware];
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV !== 'production') {
     const { logger } = require('redux-logger');
     middlewares.push(logger);
   }

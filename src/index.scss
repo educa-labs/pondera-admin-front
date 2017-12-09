@@ -3,3 +3,15 @@ $section-padding: 1.5rem 0;
 
 @import "node_modules/bulma/bulma.sass";
 @import "./styles/navbar";
+
+.box-hoverable {
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+.box-hoverable:hover {
+  border-color: hsl(217, 71%, 53%);
+}
+
+.box-selected {
+  border-color: hsl(171, 100%, 41%);
+}

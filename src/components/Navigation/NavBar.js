@@ -13,7 +13,7 @@ class Navbar extends Component {
 
   render() {
     const { value } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, count } = this.props;
     return (
       <nav className="">
         <div className="container is-fluid">
@@ -31,7 +31,22 @@ class Navbar extends Component {
               />
             </div>
             <div className="column">
-              <a className="button is-primary">Exportar CSV</a>
+              <div className="level">
+                <div className="level-left">
+                  <div className="level-item">
+                    <div>
+                      <p className="heading">Leads totales</p>
+                      <p className="title is-5">{count}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="level-right">
+                  <div className="level-item">
+                    <a className="button is-primary">Exportar CSV</a>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -40,4 +55,6 @@ class Navbar extends Component {
   }
 }
 
-export default connect(null)(Navbar);
+export default connect(state => ({
+  count: state.careers.count,
+}))(Navbar);
