@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import is from 'is_js';
-import { toggleSelection } from '../../redux/filters';
+import { toggleSelection } from '../../redux/query';
 import SearcInput from './SearchInput';
 import UnivItem from './UnivItem';
 import FilteredList from '../FilteredList';
@@ -55,5 +55,5 @@ class UniversityPanel extends Component {
 }
 
 export default connect(state => ({
-  selections: state.filters,
+  selections: state.query.selections,
 }))(UniversityPanel);
