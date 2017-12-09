@@ -38,7 +38,6 @@ class UniversityPanel extends Component {
           value={value}
           onChange={ev => this.setState({ value: ev.target.value })}
           afterTyping={() => this.setState(updateFilter)}
-          time={500}
         />
         <FilteredList filter={filter}>
           {univs.map(univ => (
