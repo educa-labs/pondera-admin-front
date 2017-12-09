@@ -4375,6 +4375,10 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-after-typing@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-after-typing/-/react-after-typing-1.0.1.tgz#a316d3df41a6db4fddbccb40298ae8b9cd0259ad"
+
 react-deep-force-update@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.1.1.tgz#8ea4263cd6455a050b37445b3f08fd839d86e909"

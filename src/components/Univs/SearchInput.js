@@ -1,5 +1,5 @@
 import React from 'react';
-import afterTyping from '../hoc/afterTyping';
+import afterTyping from 'react-after-typing';
 
 
 const SearchInput = ({ value, onChange }) => (

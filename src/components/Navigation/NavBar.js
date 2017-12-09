@@ -11,7 +11,7 @@ const Navbar = ({ total }) => (
           </a>
         </div>
         <div className="column is-6">
-          <SearchBar />
+          <SearchBar afterTyping={() => console.log('Hola')} />
         </div>
         <div className="column">
           <a className="button is-primary">Exportar CSV</a>

@@ -1,4 +1,5 @@
 import React from 'react';
+import afterTyping from 'react-after-typing';
 
 const SearchBar = ({ onChange, value}) => (
   <div className="field has-addons">
@@ -22,5 +23,5 @@ const SearchBar = ({ onChange, value}) => (
   </div>
 );
 
-export default SearchBar;
+export default afterTyping(SearchBar);
 
