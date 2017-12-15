@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
@@ -28,6 +27,9 @@ const Menu = styled.div`
   ${media.desktop`
     transform: translateX(${x});
   `}
+  a {
+    color: inherit;
+  }
 `;
 
 
@@ -35,16 +37,16 @@ const SideMenu = (props) => {
   const { pathname } = props.location;
   return (
     <Menu open={props.open}>
-      <MenuItem active={pathname === '/signup'}>
-        <Link to="/signup">Crear cuenta</Link>
+      <MenuItem linkTo="/signup">
+        Crear cuenta
       </MenuItem>
-      <MenuItem>
-        <a href="https://api.pondera.cl/api/v1/admin/excel">Descargar Excel</a>
+      <MenuItem href="https://api.pondera.cl/api/v1/admin/excel">
+        Descargar Excel
       </MenuItem>
-      <MenuItem active={pathname === '/leads'}>
+      <MenuItem linkTo="/leads">
         Leads
       </MenuItem>
-      <SubMenu>
+      <SubMenu open={pathname === '/leads'}>
         <MenuItem>Exportar CSV</MenuItem>
       </SubMenu>
     </Menu>

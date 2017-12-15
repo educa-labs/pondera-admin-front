@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const primary = props => props.theme.colors.primary;
@@ -25,15 +27,37 @@ const mixin = props => (
   props.active ? selectedMixin : defaultMixin
 );
 
-const MenuItem = styled.div`
+const Label = styled.div`
   cursor: pointer;
   margin: 5px 0.5rem;
   padding: 5px 1rem;
   border-radius: 3px;
-  a {
-    color: inherit;
-  }
   ${mixin}
 `;
 
-export default MenuItem;
+const MenuItem = ({
+  linkTo, active, children, location, href
+}) => {
+  const labelEl = (
+    <Label active={location.pathname === linkTo}>
+      {children}
+    </Label>
+  );
+  if (linkTo) {
+    return (
+      <Link to={linkTo || '#'}>
+        {labelEl}
+      </Link>
+    );
+  }
+  if (href) {
+    return (
+      <a href={href}>
+        {labelEl}
+      </a>
+    );
+  }
+  return labelEl;
+};
+
+export default withRouter(MenuItem);
