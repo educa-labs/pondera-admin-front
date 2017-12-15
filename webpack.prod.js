@@ -10,26 +10,19 @@ const extractPlugin = new ExtractTextPlugin({
 });
 
 module.exports = {
-  entry: {
-    app: ['babel-polyfill', './src/index.js'],
-  },
+  entry: [
+    './src/index.js',
+  ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[chunkhash].js',
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['react', 'env', 'stage-2'],
-            },
-          },
-        ],
+        use: 'babel-loader',
       },
       {
         test: /\.scss$/,
