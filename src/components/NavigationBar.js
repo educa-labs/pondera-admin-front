@@ -1,16 +1,18 @@
 import React from 'react';
 import t from 'prop-types';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import media from '../styled/media';
+import Logo from '../svg/logo.svg';
 
 const primary = props => props.theme.colors.primary;
+const white = props => props.theme.colors.white;
 
 const NavBar = styled.nav`
   height: 3rem;
   display: flex;
-  background: ${primary};
-  color: white;
+  background: ${white};
+  color: ${primary};
 `;
 
 const Header = styled.div`
@@ -21,6 +23,10 @@ const Header = styled.div`
   ${media.desktop`
     display: none;
   `}
+  svg {
+    fill: ${primary};
+    margin-top: 5px;
+  }
 `;
 
 const Body = styled.div`
@@ -32,7 +38,6 @@ const Body = styled.div`
 const Left = styled.div`
   display: flex;
   flex: 1;
-  jistify-content: center;
   align-items: center;
 `;
 
@@ -52,6 +57,7 @@ const OnlyMobile = styled.div`
 
 const Iconbutton = styled.div`
   cursor: pointer;
+  color: ${primary};
   border-radius: 50%;
   &:hover {
     opacity: 0.9
@@ -62,7 +68,7 @@ const Iconbutton = styled.div`
 const NavigationBar = props => (
   <NavBar>
     <Header>
-      Logo
+      <Link to="/"><Logo height={30} width={120} /></Link>
     </Header>
     <Body>
       <Left>
@@ -73,7 +79,9 @@ const NavigationBar = props => (
         </OnlyMobile>
       </Left>
       <Right>
-        Ingresa
+        {props.token ? 'Salir' : (
+          <Link to="/" className="button is-white">Ingresa</Link>
+        )}
       </Right>
     </Body>
   </NavBar>
