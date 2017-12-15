@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
@@ -11,6 +12,7 @@ const textColor = props => props.theme.colors.textColor;
 const x = props => (
   props.open ? '0' : '-260px'
 );
+
 
 const Menu = styled.div`
   position: absolute;
@@ -36,7 +38,9 @@ const SideMenu = (props) => {
       <MenuItem active={pathname === '/signup'}>
         <Link to="/signup">Crear cuenta</Link>
       </MenuItem>
-      <MenuItem >Descargar Excel</MenuItem>
+      <MenuItem>
+        <a href="https://api.pondera.cl/api/v1/admin/excel">Descargar Excel</a>
+      </MenuItem>
       <MenuItem active={pathname === '/leads'}>
         Leads
       </MenuItem>
@@ -45,6 +49,6 @@ const SideMenu = (props) => {
       </SubMenu>
     </Menu>
   );
-}
+};
 
 export default withRouter(SideMenu);
