@@ -22,7 +22,7 @@ const defaultMixin = css`
 `;
 
 const mixin = props => (
-  props.selected ? selectedMixin : defaultMixin
+  props.active ? selectedMixin : defaultMixin
 );
 
 const MenuItem = styled.div`
@@ -30,6 +30,9 @@ const MenuItem = styled.div`
   margin: 5px 0.5rem;
   padding: 5px 1rem;
   border-radius: 3px;
+  a {
+    color: inherit;
+  }
   ${mixin}
 `;
 

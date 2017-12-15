@@ -1,6 +1,7 @@
 import React from 'react';
 import t from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 import media from '../styled/media';
 
 const primary = props => props.theme.colors.primary;
@@ -82,4 +83,4 @@ NavigationBar.propTypes = {
   toggleSideMenu: t.func.isRequired,
 };
 
-export default NavigationBar;
+export default withRouter(NavigationBar);

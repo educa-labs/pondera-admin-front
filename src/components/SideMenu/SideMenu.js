@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter, Link } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
 import media from '../../styled/media';
@@ -28,15 +29,22 @@ const Menu = styled.div`
 `;
 
 
-const SideMenu = props => (
-  <Menu open={props.open}>
-    <MenuItem>Crear cuenta</MenuItem>
-    <MenuItem>Descargar Excel</MenuItem>
-    <MenuItem>Leads</MenuItem>
-    <SubMenu>
-      <MenuItem>Exportar CSV</MenuItem>
-    </SubMenu>
-  </Menu>
-);
+const SideMenu = (props) => {
+  const { pathname } = props.location;
+  return (
+    <Menu open={props.open}>
+      <MenuItem active={pathname === '/signup'}>
+        <Link to="/signup">Crear cuenta</Link>
+      </MenuItem>
+      <MenuItem >Descargar Excel</MenuItem>
+      <MenuItem active={pathname === '/leads'}>
+        Leads
+      </MenuItem>
+      <SubMenu>
+        <MenuItem>Exportar CSV</MenuItem>
+      </SubMenu>
+    </Menu>
+  );
+}
 
-export default SideMenu;
+export default withRouter(SideMenu);

@@ -1,9 +1,13 @@
 import React, { Fragment, Component } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
+import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 //import NavBar from '../components/Navigation/NavBar';
 // import Layout from '../components/Layaout';
-import UniversityPanel from '../components/Univs/UniversityPanel';
-import CareerPanel from '../components/Careers/CareerPanel';
+// import UniversityPanel from '../components/Univs/UniversityPanel';
+// import CareerPanel from '../components/Careers/CareerPanel';
+import Login from './Login';
+import Leads from './Leads';
+import Signup from './Signup';
 import SideMenu from '../components/SideMenu/SideMenu';
 import NavBar from '../components/NavigationBar';
 import Container from '../components/Layout/Container';
@@ -65,13 +69,19 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Fragment>
-          <NavBar toggleSideMenu={() => this.setState(toggleOpen)} />
-          <SideMenu open={this.state.open} />
-          <Container open={this.state.open}>
-            Hola
-          </Container>
-        </Fragment>
+        <Router>
+          <Fragment>
+            <NavBar toggleSideMenu={() => this.setState(toggleOpen)} />
+            <SideMenu open={this.state.open} />
+            <Container open={this.state.open}>
+              <Switch>
+                <Route path="/leads" component={Leads} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/" component={Login} />
+              </Switch>
+            </Container>
+          </Fragment>
+        </Router>
       </ThemeProvider>
     );
   }
