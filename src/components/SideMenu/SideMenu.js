@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
 import media from '../../styled/media';

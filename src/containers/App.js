@@ -1,10 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Route, Switch, HashRouter as Router } from 'react-router-dom';
-//import NavBar from '../components/Navigation/NavBar';
-// import Layout from '../components/Layaout';
-// import UniversityPanel from '../components/Univs/UniversityPanel';
-// import CareerPanel from '../components/Careers/CareerPanel';
 import Login from './Login';
 import Leads from './Leads';
 import Signup from './Signup';
@@ -12,34 +8,6 @@ import SideMenu from '../components/SideMenu/SideMenu';
 import NavBar from '../components/NavigationBar';
 import Container from '../components/Layout/Container';
 
-const univs = [
-  { id: 1, title: 'PUC' },
-  { id: 2, title: 'Universidad Central ' },
-  { id: 3, title: 'Universidad Gabriela Mistral' },
-];
-
-const careers = [
-  {
-    id: 1,
-    title: 'Ingenieria Civil',
-    uTitle: 'Pontificia Universidad Catolica',
-    count: 1052,
-    uId: 1,
-  },
-  {
-    id: 2,
-    title: 'Derecho',
-    uTitle: 'Universidad Central',
-    count: 1052,
-    uId: 2,
-  },
-  {
-    id: 3,
-    title: 'Administracion Publica',
-    count: 120,
-    uId: 3,
-  },
-];
 
 const theme = {
   colors: {
