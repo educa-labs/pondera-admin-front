@@ -1,10 +1,12 @@
 import React, { Fragment, Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import NavBar from '../components/Navigation/NavBar';
+//import NavBar from '../components/Navigation/NavBar';
 // import Layout from '../components/Layaout';
 import UniversityPanel from '../components/Univs/UniversityPanel';
 import CareerPanel from '../components/Careers/CareerPanel';
-import SideMenu from '../components/SideMenu';
+import SideMenu from '../components/SideMenu/SideMenu';
+import NavBar from '../components/NavigationBar';
+import Container from '../components/Layout/Container';
 
 const univs = [
   { id: 1, title: 'PUC' },
@@ -48,22 +50,6 @@ const theme = {
   },
 };
 
-const x = props => (
-  props.open ? '260px' : '0'
-);
-
-const Container = styled.div`
-  height: 100vh;
-  background: ${props => props.theme.colors.gray};
-
-  transition: transform .5s ease;
-  transform: translateX(260px);
-
-  @media (max-width: 800px) {
-    transform: translateX(${x});
-  }
-`;
-
 const toggleOpen = state => ({
   open: !state.open,
 });
@@ -80,11 +66,10 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Fragment>
+          <NavBar toggleSideMenu={() => this.setState(toggleOpen)} />
           <SideMenu open={this.state.open} />
           <Container open={this.state.open}>
-            <button onClick={() => this.setState(toggleOpen)}>
-              Open
-            </button>
+            Hola
           </Container>
         </Fragment>
       </ThemeProvider>
