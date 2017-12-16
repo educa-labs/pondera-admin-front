@@ -4,9 +4,8 @@ import { Form, TextInput } from '../styled/Form';
 import { Title, Subtitle } from '../styled/Text';
 
 
-
 const Login = () => (
-  <Fragment>
+  <div>
     <Title>Ingresa como administrador</Title>
     <Card>
       <Form>
@@ -20,11 +19,11 @@ const Login = () => (
           type="password"
         />
         <div className="control is-grouped-right">
-          <button className="button is-primary">Submit</button>
+          <button className="button is-primary">Ingresar</button>
         </div>
       </Form>
     </Card>
-  </Fragment>
+  </div>
 );
 
 export default Login;

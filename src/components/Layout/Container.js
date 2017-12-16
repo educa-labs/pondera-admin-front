@@ -12,6 +12,8 @@ const Content = styled.div`
   width: calc(100vw - 260px);
   transition: transform .5s ease;
   transform: translateX(260px);
+  display: flex;
+  justify-content: center;
 
   ${media.desktop`
     transform: translateX(${x});

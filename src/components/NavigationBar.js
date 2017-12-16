@@ -13,6 +13,9 @@ const NavBar = styled.nav`
   display: flex;
   background: ${white};
   color: ${primary};
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+  z-index: 10;
+  position: relative;
 `;
 
 const Header = styled.div`
@@ -46,6 +49,9 @@ const Right = styled.div`
   flex: 1;
   justify-content: flex-end;
   align-items: center;
+  a {
+    margin-left: 10px;
+  }
 `;
 
 const OnlyMobile = styled.div`
@@ -79,8 +85,11 @@ const NavigationBar = props => (
         </OnlyMobile>
       </Left>
       <Right>
+        <a className="button is-white" href="https://api.pondera.cl/api/v1/admin/excel">
+          Descargar Excel
+        </a>
         {props.token ? 'Salir' : (
-          <Link to="/" className="button is-white">Ingresa</Link>
+          <Link to="/" className="button is-primary">Log In</Link>
         )}
       </Right>
     </Body>

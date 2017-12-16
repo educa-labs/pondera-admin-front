@@ -40,9 +40,6 @@ const SideMenu = (props) => {
       <MenuItem linkTo="/signup">
         Crear cuenta
       </MenuItem>
-      <MenuItem href="https://api.pondera.cl/api/v1/admin/excel">
-        Descargar Excel
-      </MenuItem>
       <MenuItem linkTo="/leads">
         Leads
       </MenuItem>
