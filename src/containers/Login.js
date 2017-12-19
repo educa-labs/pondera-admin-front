@@ -4,6 +4,7 @@ import { setFieldValue, submitForm, runValidator } from 'redux-duck-form';
 import Card from '../styled/Card';
 import { Form, TextInput } from '../styled/Form';
 import { Title } from '../styled/Text';
+import { saveToken } from '../redux/session';
 import * as api from '../api';
 
 
@@ -21,13 +22,22 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.token !== nextProps.token) {
+      if (nextProps.token) {
+        nextProps.history.replace('/leads');
+      }
+    }
+  }
+
   onSubmit(ev) {
     ev.preventDefault();
     const onSuccess = (values) => {
       this.setState({ loading: true });
       api.createSession(values)
         .then((res) => {
-          console.log(res);
+          console.log(res.data.token);
+          this.props.dispatch(saveToken(res.data.token));
         })
         .catch((err) => {
           if (err.response) {
@@ -90,7 +100,7 @@ class Login extends Component {
                 Ingresar
               </button>
             </div>
-            <br />
+            {error && <br />}
             {error && (
               <div className="notification is-danger">
                 <button onClick={() => this.setState({ error: '' })} className="delete" />
@@ -105,6 +115,7 @@ class Login extends Component {
 }
 
 export default connect(state => ({
+  token: state.token,
   mail: state.loginForm.mail.value,
   password: state.loginForm.password.value,
   errors: {
