@@ -1,12 +1,13 @@
 import React from 'react';
 import t from 'prop-types';
 import styled from 'styled-components';
+import afterTyping from 'react-after-typing';
 
 export const Form = styled.form`
   width: 20rem;
 `;
 
-export const TextInput = ({
+const Input = ({
   isValid, errorText, label, type, ...props
 }) => {
   const className = `input ${isValid ? 'is-success' : ''} ${errorText ? 'is-danger' : ''}`;
@@ -21,15 +22,17 @@ export const TextInput = ({
   );
 };
 
-TextInput.propTypes = {
+Input.propTypes = {
   label: t.string.isRequired,
   type: t.string,
   errorText: t.string,
   isValid: t.bool,
 };
 
-TextInput.defaultProps = {
+Input.defaultProps = {
   errorText: '',
   isValid: false,
   type: 'text',
 };
+
+export const TextInput = afterTyping(Input);

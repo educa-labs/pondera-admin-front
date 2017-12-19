@@ -2,7 +2,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
-import reducer from './rootReducer';
+import reducer from '.';
 
 function configureStore() {
   const middlewares = [thunkMiddleware];
@@ -17,7 +17,7 @@ function configureStore() {
   );
   if (module.hot) {
     module.hot.accept('./rootReducer', () => {
-      const nextRootReducer = require('./rootReducer');
+      const nextRootReducer = require('.');
       store.replaceReducer(nextRootReducer);
     });
   }

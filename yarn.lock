@@ -4586,7 +4586,7 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-after-typing@^1.0.1:
+react-after-typing@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-after-typing/-/react-after-typing-1.0.2.tgz#f21c799d75b7ac974ab467480fdbc3ee8547e632"
 
@@ -4755,6 +4755,14 @@ reduce-function-call@^1.0.1:
 redux-devtools-extension@^2.13.2:
   version "2.13.2"
   resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.2.tgz#e0f9a8e8dfca7c17be92c7124958a3b94eb2911d"
+
+redux-duck-form@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/redux-duck-form/-/redux-duck-form-0.2.1.tgz#1162e532eb1fd9cc4a731b6249aab61f120308bb"
+  dependencies:
+    babel-preset-env "^1.6.1"
+    redux "^3.7.2"
+    redux-thunk "^2.2.0"
 
 redux-logger@^3.0.6:
   version "3.0.6"

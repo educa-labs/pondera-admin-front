@@ -38,10 +38,13 @@ const SideMenu = (props) => {
   return (
     <Menu open={props.open}>
       <MenuItem linkTo="/signup">
-        Crear cuenta
+        Crear admin
       </MenuItem>
       <MenuItem linkTo="/leads">
         Leads
+      </MenuItem>
+      <MenuItem linkTo="/users">
+        Usuarios
       </MenuItem>
       <SubMenu open={pathname === '/leads'}>
         <MenuItem>Exportar CSV</MenuItem>
