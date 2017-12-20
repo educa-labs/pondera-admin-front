@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Title = styled.p`
   font-size: 1.75rem;
   font-weight: 500;
-  margin: 0 1rem;
 `;
 
 export const Subtitle = styled.p`

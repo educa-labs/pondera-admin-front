@@ -13,9 +13,9 @@ const SearchInput = ({ value, onChange }) => (
       <input
         onChange={onChange}
         value={value}
-        className="input"
+        className="input is-primary"
         type="text"
-        placeholder="Busca una universidad"
+        placeholder="Filtra por universidades"
       />
       <span className="icon is-left">
         <i className="fa fa-search" />

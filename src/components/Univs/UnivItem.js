@@ -1,10 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const selected = ({ selected }) => (
+
+const accent = props => props.theme.colors.accent;
+const selected = ({ selected, ...props }) => (
   selected ? css`
   span {
-    color: #3273dc;
+    color: ${accent};
   }
   ` : null
 );
@@ -16,6 +18,9 @@ const PanelBlock = styled.a`
   justify-content: flex-start;
   padding: 0.5em 0.75em;
   ${selected}
+  &: hover {
+    background: #F5F5F5;
+  }
 `;
 
 

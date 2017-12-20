@@ -41,7 +41,7 @@ const SideMenu = (props) => {
         Crear admin
       </MenuItem>
       <MenuItem linkTo="/leads">
-        Leads
+        Ponderaciones
       </MenuItem>
       <SubMenu open={pathname === '/leads'}>
         <MenuItem>Exportar CSV</MenuItem>

@@ -40,13 +40,11 @@ class UniversityPanel extends Component {
     if (univs === null) return <div>Loading ...</div>
     return (
       <Card>
-        <Subtitle>
-          Universidades
-        </Subtitle>
         <SearcInput
           value={value}
           onChange={ev => this.setState({ value: ev.target.value })}
           afterTyping={() => this.setState(updateFilter)}
+          time={300}
         />
         <Scrollable>
           <FilteredList filter={filter}>

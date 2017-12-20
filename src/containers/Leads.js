@@ -4,8 +4,9 @@ import { getLeads } from '../redux/leads';
 import { getUnivs } from '../redux/univs';
 import Layout from '../components/Layout/LeadsLayout';
 import Card from '../styled/Card';
-import { Subtitle } from '../styled/Text';
+import Header from '../components/Leads/Header';
 import Panel from '../components/Univs/UniversityPanel';
+import SearchCareer from '../components/Careers/SearchInput';
 
 class Leads extends Component {
   componentWillMount() {
@@ -19,9 +20,9 @@ class Leads extends Component {
   render() {
     return (
       <Layout>
-        <Card>Hola</Card>
+        <Header />
         <Panel />
-        <Card>Chao</Card>
+        <SearchCareer />
       </Layout>
     );
   }

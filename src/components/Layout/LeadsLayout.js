@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import media from '../../styled/media';
 
 const flex = props => props.flex || 1;
+const height = props => props.height || 'auto';
 
 const Container = styled.div`
   display: flex;
@@ -25,11 +26,11 @@ const Box = styled.div`
 
 export default props => (
   <Container>
-    <Col flex={3}>
-      {props.children[0]}
-    </Col>
     <Col flex={2}>
-      <Box>{props.children[1]}</Box>
+      <Box>{props.children[0]}</Box>
+      {props.children[1]}
+    </Col>
+    <Col flex={3}>
       {props.children[2]}
     </Col>
   </Container>
