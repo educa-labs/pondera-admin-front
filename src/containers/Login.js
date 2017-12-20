@@ -36,7 +36,6 @@ class Login extends Component {
       this.setState({ loading: true });
       api.createSession(values)
         .then((res) => {
-          console.log(res.data.token);
           this.props.dispatch(saveToken(res.data.token));
         })
         .catch((err) => {
