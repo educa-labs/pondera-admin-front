@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
+import is from 'is_js';
 import api from '../api';
 
 const GET_LEADS_REQUEST = 'GET_LEADS_REQUEST';
@@ -38,6 +39,29 @@ export const getLeads = token => (
 /* SELECTORS */
 
 const leadsSelector = state => state.leads.leads;
+const selections = state => state.query.selections;
+const filter = state => state.query.filter;
+const pageSelector = state => state.leads.page;
+
+export const filteredLeads = createSelector(
+  leadsSelector,
+  selections,
+  filter,
+  pageSelector,
+  (leads, selec, fil, pag) => {
+    const result = leads.filter((item) => {
+      let inArray = true;
+      if (is.not.empty(selec)) {
+        inArray = is.inArray(item.uId, selec);
+      }
+      return inArray && is.include(item.cTitle.toLowerCase(), fil);
+    });
+    if (result.length >= 30) {
+      return result.slice(pag * 30, (pag + 1) * 30);
+    }
+    return result;
+  },
+);
 
 const page = (state = 0, action) => {
   switch (action.type) {
@@ -71,12 +95,24 @@ const error = (state = null, action) => {
   }
 };
 
-const generateLead = cId => ({
-  cId,
-  uTitle: 'Universidad de Chile',
-  cTitle: 'Cine y Televisión',
-  count: '320',
-});
+const generateLead = (cId) => {
+  if (cId % 2 === 1) {
+    return ({
+      cId,
+      uId: 10,
+      uTitle: 'Adolfo',
+      cTitle: 'BBBBBB',
+      count: '320',
+    });
+  }
+  return ({
+    cId,
+    uId: 6,
+    uTitle: 'PUC',
+    cTitle: 'AAAAAA',
+    count: '320',
+  });
+};
 
 const iterator = Array.from(Array(1000).keys());
 const initialState = iterator.map(item => generateLead(item));

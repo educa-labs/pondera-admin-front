@@ -30,9 +30,9 @@ const careers = (state = [], action) => {
 const count = (state = 0, action) => {
   switch (action.type) {
     case ADD_CAREER:
-      return state + action.count;
+      return state + Number(action.count);
     case REMOVE_CAREER:
-      return state - action.count;
+      return state - Number(action.count);
     default:
       return state;
   }

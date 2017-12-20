@@ -17,7 +17,7 @@ const Menu = styled.div`
   position: absolute;
   left: 0;
   top: 3rem;
-  height: 100vh;
+  height: calc(100vh - 3rem);
   width: 260px;
   background-color: ${white};
   color: ${textColor};

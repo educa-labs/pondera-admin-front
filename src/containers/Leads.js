@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getLeads } from '../redux/leads';
+import { getLeads, filteredLeads } from '../redux/leads';
 import { getUnivs } from '../redux/univs';
 import Layout from '../components/Layout/LeadsLayout';
 import Header from '../components/Leads/Header';
@@ -18,15 +18,15 @@ class Leads extends Component {
     }
   }
   render() {
-    const { dispatch } = this.props;
+    const { dispatch, leads, count, selections, selectedCareers } = this.props;
     return (
       <Layout>
-        <Header />
+        <Header count={count} selectedCareers={selectedCareers} />
         <Panel />
         <SearchCareer dispatch={dispatch} />
         <CareerPanel
-          careers={this.props.leads}
-          selections={this.props.selections}
+          careers={leads}
+          selections={selections}
         />
       </Layout>
     );
@@ -34,8 +34,10 @@ class Leads extends Component {
 }
 
 export default connect(state => ({
-  leads: state.leads.leads,
+  leads: filteredLeads(state),
   univs: state.univs.univs,
   token: state.token,
+  selectedCareers: state.careers.careers,
+  count: state.careers.count,
   selections: state.query.selections,
 }))(Leads);
