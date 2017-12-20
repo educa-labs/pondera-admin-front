@@ -10,3 +10,19 @@ const request = axios.create({
 export const createSession = data => (
   request.post('/session', data)
 );
+
+export const getAllLeads = token => (
+  request.get('admin/stats', {
+    headers: {
+      Authorization: token,
+    },
+  })
+);
+
+export const getAllUnivs = token => (
+  request.get('/tuni/universities', {
+    headers: {
+      Authorization: token,
+    },
+  })
+);
