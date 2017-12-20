@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
+import chunk from 'lodash/chunk';
 import is from 'is_js';
 import api from '../api';
+import { TOGGLE_SELECTION, SET_FILTER_VALUE } from './query';
 
 const GET_LEADS_REQUEST = 'GET_LEADS_REQUEST';
 const GET_LEADS_SUCCESS = 'GET_LEADS_SUCCESS';
 const GET_LEADS_FAILURE = 'GET_LEADS_FAILURE';
 const NEXT_PAGE = 'NEXT_PAGE';
-const PREV_PAGE = 'PREV_PAGE';
 
 const getLeadsRequest = () => ({
   type: GET_LEADS_REQUEST,
@@ -23,12 +24,38 @@ const getLeadsFailure = error => ({
   error,
 });
 
+export const nextPage = () => ({
+  type: NEXT_PAGE,
+});
+
+const generateLead = (cId) => {
+  if (cId % 2 === 1) {
+    return ({
+      cId,
+      uId: 10,
+      uTitle: 'Adolfo',
+      cTitle: 'BBBBBB',
+      count: '320',
+    });
+  }
+  return ({
+    cId,
+    uId: 6,
+    uTitle: 'PUC',
+    cTitle: 'AAAAAA',
+    count: '320',
+  });
+};
+
+const iterator = Array.from(Array(1000).keys());
+const initialState = iterator.map(item => generateLead(item));
+
 export const getLeads = token => (
   async (dispatch) => {
     dispatch(getLeadsRequest());
     try {
       const res = await api.getAllLeads(token);
-      dispatch(getLeadsSuccess(res.data.data));
+      dispatch(getLeadsSuccess(initialState));
     } catch (err) {
       dispatch(getLeadsFailure(err));
     }
@@ -43,6 +70,11 @@ const selections = state => state.query.selections;
 const filter = state => state.query.filter;
 const pageSelector = state => state.leads.page;
 
+
+/**
+ * Filtra los leads segun las universidades selecionadas: selections y el filtro aplicado
+ * en la barra de carreras. Luego retorna el resultado en páginas de 30 elementos
+*/
 export const filteredLeads = createSelector(
   leadsSelector,
   selections,
@@ -56,10 +88,7 @@ export const filteredLeads = createSelector(
       }
       return inArray && is.include(item.cTitle.toLowerCase(), fil);
     });
-    if (result.length >= 30) {
-      return result.slice(pag * 30, (pag + 1) * 30);
-    }
-    return result;
+    return chunk(result, 12);
   },
 );
 
@@ -67,8 +96,10 @@ const page = (state = 0, action) => {
   switch (action.type) {
     case NEXT_PAGE:
       return state + 1;
-    case PREV_PAGE:
-      return state - 1;
+    case TOGGLE_SELECTION:
+    case SET_FILTER_VALUE:
+    case GET_LEADS_SUCCESS:
+      return 0;
     default:
       return state;
   }
@@ -95,29 +126,9 @@ const error = (state = null, action) => {
   }
 };
 
-const generateLead = (cId) => {
-  if (cId % 2 === 1) {
-    return ({
-      cId,
-      uId: 10,
-      uTitle: 'Adolfo',
-      cTitle: 'BBBBBB',
-      count: '320',
-    });
-  }
-  return ({
-    cId,
-    uId: 6,
-    uTitle: 'PUC',
-    cTitle: 'AAAAAA',
-    count: '320',
-  });
-};
 
-const iterator = Array.from(Array(1000).keys());
-const initialState = iterator.map(item => generateLead(item));
 
-const leads = (state = initialState, action) => {
+const leads = (state = [], action) => {
   switch (action.type) {
     case GET_LEADS_SUCCESS:
       return action.leads;

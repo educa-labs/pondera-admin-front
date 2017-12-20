@@ -1,8 +1,8 @@
 import is from 'is_js';
 import { combineReducers } from 'redux';
 
-const TOGGLE_SELECTION = 'TOGGLE_SELECTION';
-const SET_FILTER_VALUE = 'SET_FILTER_VALUE';
+export const TOGGLE_SELECTION = 'TOGGLE_SELECTION';
+export const SET_FILTER_VALUE = 'SET_FILTER_VALUE';
 
 /* ACTION CREATORS */
 

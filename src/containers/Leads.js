@@ -16,17 +16,37 @@ class Leads extends Component {
     if (!this.props.univs && this.props.token) {
       this.props.dispatch(getUnivs(this.props.token));
     }
+
+    this.getCareers = this.getCareers.bind(this);
   }
+
+  getCareers(currentPage) {
+    const { leadPages } = this.props;
+    return leadPages.slice(0, currentPage + 1).reduce((leads, page) => (
+      [...leads, ...page]
+    ), []);
+  }
+
   render() {
-    const { dispatch, leads, count, selections, selectedCareers } = this.props;
+    const {
+      dispatch,
+      count,
+      selections,
+      selectedCareers,
+      leadPages,
+      currentPage,
+      token,
+    } = this.props;
+    if (!token) return <div>Debes ingresar para acceder</div>
     return (
       <Layout>
         <Header count={count} selectedCareers={selectedCareers} />
         <Panel />
         <SearchCareer dispatch={dispatch} />
         <CareerPanel
-          careers={leads}
-          selections={selections}
+          totalPages={leadPages.length}
+          currentPage={currentPage}
+          careers={this.getCareers(currentPage)}
         />
       </Layout>
     );
@@ -34,7 +54,8 @@ class Leads extends Component {
 }
 
 export default connect(state => ({
-  leads: filteredLeads(state),
+  leadPages: filteredLeads(state),
+  currentPage: state.leads.page,
   univs: state.univs.univs,
   token: state.token,
   selectedCareers: state.careers.careers,

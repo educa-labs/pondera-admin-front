@@ -3,16 +3,24 @@ import is from 'is_js';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Card from '../../styled/Card';
+import { Subtitle } from '../../styled/Text';
 import CareerItem from './CareerItem';
 import { addCareer, removeCareer } from '../../redux/careers';
+import { nextPage } from '../../redux/leads';
 
 
 const Box = styled.div`
-  height: 28rem;
+  max-height: 27rem;
   overflow: scroll;
 `;
 
-const CareerPanel = ({ careers, filter, selections, dispatch, selectedCareers }) => (
+const CareerPanel = ({
+  careers,
+  dispatch,
+  selectedCareers,
+  totalPages,
+  currentPage,
+}) => (
   <Card>
     <Box>
       {careers && careers.map(car => (
@@ -29,7 +37,24 @@ const CareerPanel = ({ careers, filter, selections, dispatch, selectedCareers })
           }}
         />
       ))}
-      <div>Mostrar más</div>
+      {is.empty(careers) && (
+        <Subtitle>No hay carreras que mostrar</Subtitle>
+      )}
+      {totalPages > currentPage && (
+        <div className="level">
+          <div className="level-left" />
+          <div className="level-right">
+            <button
+              className="button is-primary"
+              onClick={() => {
+                dispatch(nextPage())
+              }}
+            >
+              Mostrar más
+            </button>
+          </div>
+        </div>
+      )}
     </Box>
   </Card>
 );
