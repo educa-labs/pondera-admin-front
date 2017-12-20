@@ -16,7 +16,7 @@ function configureStore() {
     composeWithDevTools(applyMiddleware(...middlewares)),
   );
   if (module.hot) {
-    module.hot.accept('./rootReducer', () => {
+    module.hot.accept('.', () => {
       const nextRootReducer = require('.');
       store.replaceReducer(nextRootReducer);
     });

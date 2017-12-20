@@ -7,11 +7,11 @@ const request = axios.create({
   timeout: 2000,
 });
 
-export const createSession = data => (
+const createSession = data => (
   request.post('/session', data)
 );
 
-export const getAllLeads = token => (
+const getAllLeads = token => (
   request.get('admin/stats', {
     headers: {
       Authorization: token,
@@ -19,10 +19,16 @@ export const getAllLeads = token => (
   })
 );
 
-export const getAllUnivs = token => (
+const getAllUnivs = token => (
   request.get('/tuni/universities', {
     headers: {
       Authorization: token,
     },
   })
 );
+
+export default {
+  createSession,
+  getAllLeads,
+  getAllUnivs,
+};
