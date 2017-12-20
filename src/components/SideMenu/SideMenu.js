@@ -43,12 +43,12 @@ const SideMenu = (props) => {
       <MenuItem linkTo="/leads">
         Leads
       </MenuItem>
-      <MenuItem linkTo="/users">
-        Usuarios
-      </MenuItem>
       <SubMenu open={pathname === '/leads'}>
         <MenuItem>Exportar CSV</MenuItem>
       </SubMenu>
+      <MenuItem linkTo="/users">
+        Usuarios
+      </MenuItem>
     </Menu>
   );
 };

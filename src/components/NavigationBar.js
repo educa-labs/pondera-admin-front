@@ -1,6 +1,7 @@
 import React from 'react';
 import t from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import media from '../styled/media';
 import Logo from '../svg/logo.svg';
@@ -100,4 +101,6 @@ NavigationBar.propTypes = {
   toggleSideMenu: t.func.isRequired,
 };
 
-export default withRouter(NavigationBar);
+export default withRouter(connect(state => ({
+  token: state.token,
+}))(NavigationBar));
