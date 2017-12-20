@@ -10,7 +10,8 @@
   "scripts": {
     "start": "webpack-dev-server --hot --config webpack.dev.js",
     "build": "webpack -p --config webpack.prod.js",
-    "production": "node production.js"
+    "production": "node production.js",
+    "deploy": "source .env && s3cmd sync dist/* s3://admin.pondera.cl --access_key=$educalabs_aws_key --secret_key=$educalabs_aws_secret"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -30,7 +31,7 @@
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
-    "redux-duck-form": "^0.2.1",
+    "redux-duck-form": "^0.3.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
