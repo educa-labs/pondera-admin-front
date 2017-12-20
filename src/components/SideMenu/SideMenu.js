@@ -37,9 +37,6 @@ const SideMenu = (props) => {
   const { pathname } = props.location;
   return (
     <Menu open={props.open}>
-      <MenuItem linkTo="/signup">
-        Crear admin
-      </MenuItem>
       <MenuItem linkTo="/leads">
         Ponderaciones
       </MenuItem>
