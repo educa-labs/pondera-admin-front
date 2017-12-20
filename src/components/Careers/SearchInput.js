@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import afterTyping from 'react-after-typing';
+import { setFilterValue } from '../../redux/query';
 import Card from '../../styled/Card';
 
 const Row = styled.div`
@@ -28,13 +29,33 @@ const StyledInput = styled(Input)`
   flex: 1;
 `;
 
-const SearchInput = props => (
-  <Card>
-    <Row>
-      <span>Encuentra una carrera como</span>
-      <StyledInput {...props} />
-    </Row>
-  </Card>
-);
+class SearchInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '',
+    };
+  }
+
+  render() {
+    const { dispatch, ...rest} = this.props;
+    const { value } = this.state;
+    return (
+      <Card>
+        <Row>
+          <span>Encuentra una carrera como</span>
+          <StyledInput
+            {...rest}
+            onChange={(ev) => { this.setState({ value: ev.target.value })}}
+            value={value}
+            afterTyping={() => {
+              dispatch(setFilterValue(value));
+            }}
+          />
+        </Row>
+      </Card>
+    );
+  }
+}
 
 export default SearchInput;

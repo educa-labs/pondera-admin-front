@@ -32,6 +32,7 @@ export default props => (
     </Col>
     <Col flex={3}>
       {props.children[2]}
+      {props.children[3]}
     </Col>
   </Container>
 );

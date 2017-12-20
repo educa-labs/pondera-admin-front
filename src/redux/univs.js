@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as api from '../api';
+import api from '../api';
 
 const GET_UNIVS_REQUEST = 'GET_UNIVS_REQUEST';
 const GET_UNIVS_SUCCESS = 'GET_UNIVS_SUCCESS';

@@ -5,7 +5,7 @@ import Card from '../styled/Card';
 import { Form, TextInput } from '../styled/Form';
 import { Title } from '../styled/Text';
 import { saveToken } from '../redux/session';
-import * as api from '../api';
+import api from '../api';
 
 
 const emptyValidator = value => (
@@ -41,13 +41,16 @@ class Login extends Component {
         })
         .catch((err) => {
           if (err.response) {
-            this.setState({ error: err.response.data.message });
+            this.setState({
+              error: err.response.data.message,
+              loading: false,
+            });
           } else {
-            this.setState({ error: 'Oops! algo salió mal' });
+            this.setState({
+              error: 'Oops! algo salió mal',
+              loading: false,
+            });
           }
-        })
-        .then(() => {
-          this.setState({ loading: false });
         });
     };
     const onError = errors => console.log(errors);
