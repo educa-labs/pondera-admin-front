@@ -49,6 +49,9 @@ const SideMenu = (props) => {
       <MenuItem linkTo="/users">
         Usuarios
       </MenuItem>
+      <MenuItem href="https://api.pondera.cl/api/v1/admin/excel">
+        Descargar Excel
+      </MenuItem>
     </Menu>
   );
 };

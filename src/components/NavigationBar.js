@@ -86,9 +86,6 @@ const NavigationBar = props => (
         </OnlyMobile>
       </Left>
       <Right>
-        <a className="button is-white" href="https://api.pondera.cl/api/v1/admin/excel">
-          Descargar Excel
-        </a>
         {props.token ? 'Salir' : (
           <Link to="/" className="button is-primary">Log In</Link>
         )}
