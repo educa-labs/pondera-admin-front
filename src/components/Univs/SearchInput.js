@@ -1,9 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 import afterTyping from 'react-after-typing';
+
+const Div = styled.div`
+  margin: 5px 0;
+`;
 
 
 const SearchInput = ({ value, onChange }) => (
-  <div className="panel-block">
+  <Div>
     <p className="control has-icons-left">
       <input
         onChange={onChange}
@@ -16,7 +21,7 @@ const SearchInput = ({ value, onChange }) => (
         <i className="fa fa-search" />
       </span>
     </p>
-  </div>
+  </Div>
 );
 
 export default afterTyping(SearchInput);

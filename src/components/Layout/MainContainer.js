@@ -10,6 +10,7 @@ const Content = styled.div`
   background: ${props => props.theme.colors.grey};
   padding: 1rem;
   width: calc(100vw - 260px);
+  height: calc(100vh - 3rem);
   transition: transform .5s ease;
   transform: translateX(260px);
   display: flex;

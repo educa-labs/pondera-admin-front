@@ -7,7 +7,6 @@ const Card = styled.div`
   margin: 1rem;
   padding: 1rem;
   border-radius: 5px;
-  display: inline-flex;
   flex-direction: column;
 `;
 

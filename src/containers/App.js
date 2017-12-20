@@ -6,7 +6,7 @@ import Leads from './Leads';
 import Signup from './Signup';
 import SideMenu from '../components/SideMenu/SideMenu';
 import NavBar from '../components/NavigationBar';
-import Container from '../components/Layout/Container';
+import Container from '../components/Layout/MainContainer';
 
 
 const theme = {

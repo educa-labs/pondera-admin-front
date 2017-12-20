@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getLeads } from '../redux/leads';
 import { getUnivs } from '../redux/univs';
+import Layout from '../components/Layout/LeadsLayout';
+import Card from '../styled/Card';
+import { Subtitle } from '../styled/Text';
+import Panel from '../components/Univs/UniversityPanel';
 
 class Leads extends Component {
   componentWillMount() {
@@ -14,9 +18,11 @@ class Leads extends Component {
   }
   render() {
     return (
-      <div>
-        Leads
-      </div>
+      <Layout>
+        <Card>Hola</Card>
+        <Panel />
+        <Card>Chao</Card>
+      </Layout>
     );
   }
 }
