@@ -29,7 +29,9 @@ const getAllUnivs = token => (
 
 const getCount = token => (
   request.get('/users/count', {
-    Authorization: token,
+    headers: {
+      Authorization: token,
+    },
   })
 );
 

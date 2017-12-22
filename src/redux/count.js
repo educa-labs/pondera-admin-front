@@ -24,7 +24,7 @@ export const getCount = token => (
     dispatch(getCountRequest());
     try {
       const res = await api.getCount(token);
-      dispatch(getCountSuccess(res.data.data));
+      dispatch(getCountSuccess(res.data.data[0].count));
     } catch (err) {
       dispatch(getCountFailure(err));
     }

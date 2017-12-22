@@ -6,6 +6,10 @@ export const saveToken = token => ({
   token,
 });
 
+export const removeToken = () => ({
+  type: REMOVE_TOKEN,
+});
+
 const token = (state = null, action) => {
   switch (action.type) {
     case SAVE_TOKEN:

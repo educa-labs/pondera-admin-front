@@ -3,6 +3,7 @@ import t from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
+import { removeToken } from '../redux/session';
 import media from '../styled/media';
 import Logo from '../svg/logo.svg';
 
@@ -87,7 +88,14 @@ const NavigationBar = props => (
       </Left>
       <Right>
         {props.token ? (
-          <button className="button is-primary">Salir</button>
+          <button
+            className="button is-primary"
+            onClick={() => {
+              props.dispatch(removeToken());
+            }}
+          >
+          Salir
+          </button>
         ) : (
           <Link to="/" className="button is-primary">Log In</Link>
         )}
