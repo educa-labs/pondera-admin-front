@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: 'https://api.pondera.cl/api/v1',
+  baseURL: 'https://testapi.pondera.cl/api/v1',
   // withCredentials: true,
   responseType: 'json',
   timeout: 2000,
 });
 
 const createSession = data => (
-  request.post('/session', data)
+  request.post('/session/admin', data)
 );
 
 const getAllLeads = token => (

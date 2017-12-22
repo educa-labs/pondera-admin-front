@@ -86,7 +86,9 @@ const NavigationBar = props => (
         </OnlyMobile>
       </Left>
       <Right>
-        {props.token ? 'Salir' : (
+        {props.token ? (
+          <button className="button is-primary">Salir</button>
+        ) : (
           <Link to="/" className="button is-primary">Log In</Link>
         )}
       </Right>

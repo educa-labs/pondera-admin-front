@@ -37,15 +37,15 @@ const SideMenu = (props) => {
   const { pathname } = props.location;
   return (
     <Menu open={props.open}>
+      <MenuItem linkTo="/summary">
+        Resumen
+      </MenuItem>
       <MenuItem linkTo="/leads">
         Ponderaciones
       </MenuItem>
       <SubMenu open={pathname === '/leads'}>
         <MenuItem>Exportar CSV</MenuItem>
       </SubMenu>
-      <MenuItem linkTo="/users">
-        Usuarios
-      </MenuItem>
       <MenuItem href="https://api.pondera.cl/api/v1/admin/excel">
         Descargar Excel
       </MenuItem>

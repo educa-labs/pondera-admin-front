@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { setFieldValue, submitForm, runValidator } from 'redux-duck-form';
 import Card from '../styled/Card';
 import { Form, TextInput } from '../styled/Form';
@@ -72,6 +73,7 @@ class Login extends Component {
   render() {
     const { email, password, errors } = this.props;
     const { loading, error } = this.state;
+    if (this.props.token) return <Redirect to="/summary" />;
     return (
       <div>
         <Title>Ingresa como administrador</Title>
