@@ -14,25 +14,33 @@ const Box = styled.div`
   overflow: scroll;
 `;
 
+const Date = styled.p`
+  font-size: 14px;
+  margin-left: 10px;
+`;
+
 const CareerPanel = ({
   careers,
   dispatch,
   selectedCareers,
   totalPages,
   currentPage,
+  onRefresh,
+  loading,
+  date,
 }) => (
   <Card>
     <Box>
       {careers && careers.map(car => (
         <CareerItem
           career={car}
-          key={car.cId}
-          selected={is.inArray(car.cId, selectedCareers)}
+          key={car.cid}
+          selected={is.inArray(car.cid, selectedCareers)}
           onClick={() => {
-            if (is.inArray(car.cId, selectedCareers)) {
-              dispatch(removeCareer(car.cId, car.count));
+            if (is.inArray(car.cid, selectedCareers)) {
+              dispatch(removeCareer(car.cid, car.count));
             } else {
-              dispatch(addCareer(car.cId, car.count));
+              dispatch(addCareer(car.cid, car.count));
             }
           }}
         />
@@ -40,21 +48,34 @@ const CareerPanel = ({
       {is.empty(careers) && (
         <Subtitle>No hay carreras que mostrar</Subtitle>
       )}
-      {totalPages > currentPage && (
-        <div className="level">
-          <div className="level-left" />
+      <div className="level">
+        <div className="level-left">
+          <button
+            onClick={onRefresh}
+            className={`button is-primary ${loading ? 'is-loading' : ''}`}
+          >
+            <span className="icon">
+              <i className="fa fa-refresh" />
+            </span>
+            <span>Actualizar</span>
+          </button>
+          <Date>
+            Últ. actualización {date}
+          </Date>
+        </div>
+        {totalPages > currentPage && (
           <div className="level-right">
             <button
               className="button is-primary"
               onClick={() => {
-                dispatch(nextPage())
+                dispatch(nextPage());
               }}
             >
               Mostrar más
             </button>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </Box>
   </Card>
 );

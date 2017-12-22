@@ -50,7 +50,7 @@ const Right = styled.div`
   flex: 1;
   justify-content: flex-end;
   align-items: center;
-  a {
+  button {
     margin-left: 10px;
   }
 `;

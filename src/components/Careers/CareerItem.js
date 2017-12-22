@@ -34,8 +34,8 @@ const CareerItem = ({ career, onClick, selected }) => (
     <div className="level-left">
       <div className="level-item">
         <div>
-          <p className="heading">{career.uTitle}</p>
-          <p className="title is-5">{career.cTitle}</p>
+          <p className="heading">{career.utitle}</p>
+          <p className="title is-5">{career.ctitle}</p>
         </div>
       </div>
     </div>

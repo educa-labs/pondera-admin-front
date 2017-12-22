@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import MenuItem from './MenuItem';
@@ -35,6 +36,7 @@ const Menu = styled.div`
 
 const SideMenu = (props) => {
   const { pathname } = props.location;
+  const url = `https://testapi.pondera.cl/api/v1/admin/excel?token=${props.token}`;
   return (
     <Menu open={props.open}>
       <MenuItem linkTo="/summary">
@@ -46,11 +48,15 @@ const SideMenu = (props) => {
       <SubMenu open={pathname === '/leads'}>
         <MenuItem>Exportar CSV</MenuItem>
       </SubMenu>
-      <MenuItem href="https://api.pondera.cl/api/v1/admin/excel">
-        Descargar Excel
-      </MenuItem>
+      {props.token && (
+        <MenuItem href={url}>
+          Descargar Excel
+        </MenuItem>
+      )}
     </Menu>
   );
 };
 
-export default withRouter(SideMenu);
+export default withRouter(connect(state => ({
+  token: state.token,
+}))(SideMenu));

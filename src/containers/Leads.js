@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getLeads, filteredLeads } from '../redux/leads';
+import { getLeads, filteredLeads, nextPage } from '../redux/leads';
 import { getUnivs } from '../redux/univs';
 import Layout from '../components/Layout/LeadsLayout';
 import Header from '../components/Leads/Header';
@@ -9,6 +9,15 @@ import SearchCareer from '../components/Careers/SearchInput';
 import CareerPanel from '../components/Careers/CareerPanel';
 
 class Leads extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+    };
+
+    this.getCareers = this.getCareers.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
+  }
   componentWillMount() {
     if (!this.props.leads && this.props.token) {
       this.props.dispatch(getLeads(this.props.token));
@@ -16,8 +25,16 @@ class Leads extends Component {
     if (!this.props.univs && this.props.token) {
       this.props.dispatch(getUnivs(this.props.token));
     }
+  }
 
-    this.getCareers = this.getCareers.bind(this);
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.loading && nextProps.loading !== this.props.loading) {
+      this.setState({ date: new Date() });
+    }
+  }
+
+  onRefresh() {
+    this.props.dispatch(getLeads(this.props.token));
   }
 
   getCareers(currentPage) {
@@ -36,6 +53,7 @@ class Leads extends Component {
       leadPages,
       currentPage,
       token,
+      loading,
     } = this.props;
     if (!token) return <div>Debes ingresar para acceder</div>
     return (
@@ -44,9 +62,12 @@ class Leads extends Component {
         <Panel />
         <SearchCareer dispatch={dispatch} />
         <CareerPanel
+          onRefresh={this.onRefresh}
+          loading={loading}
           totalPages={leadPages.length}
           currentPage={currentPage}
           careers={this.getCareers(currentPage)}
+          date={this.state.date.toLocaleString()}
         />
       </Layout>
     );
@@ -55,6 +76,7 @@ class Leads extends Component {
 
 export default connect(state => ({
   leadPages: filteredLeads(state),
+  loading: state.leads.loading,
   currentPage: state.leads.page,
   univs: state.univs.univs,
   token: state.token,

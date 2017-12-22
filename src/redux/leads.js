@@ -55,7 +55,7 @@ export const getLeads = token => (
     dispatch(getLeadsRequest());
     try {
       const res = await api.getAllLeads(token);
-      dispatch(getLeadsSuccess(initialState));
+      dispatch(getLeadsSuccess(res.data.data));
     } catch (err) {
       dispatch(getLeadsFailure(err));
     }
@@ -84,9 +84,9 @@ export const filteredLeads = createSelector(
     const result = leads.filter((item) => {
       let inArray = true;
       if (is.not.empty(selec)) {
-        inArray = is.inArray(item.uId, selec);
+        inArray = is.inArray(item.uid, selec);
       }
-      return inArray && is.include(item.cTitle.toLowerCase(), fil);
+      return inArray && is.include(item.ctitle.toLowerCase(), fil);
     });
     return chunk(result, 12);
   },
