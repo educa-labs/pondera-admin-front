@@ -9,10 +9,12 @@ export const removeCareer = (id, count) => ({
   count,
 });
 
-export const addCareer = (id, count) => ({
+export const addCareer = (id, count, ctitle, utitle) => ({
   type: ADD_CAREER,
   id,
   count,
+  ctitle,
+  utitle,
 });
 
 
@@ -22,6 +24,21 @@ const careers = (state = [], action) => {
       return [...state, action.id];
     case REMOVE_CAREER:
       return state.filter(sel => sel !== action.id);
+    default:
+      return state;
+  }
+};
+
+const csv = (state = [], action) => {
+  switch (action.type) {
+    case ADD_CAREER:
+      return [...state, {
+        cid: action.id,
+        ctitle: action.ctitle,
+        utitle: action.utitle,
+      }];
+    case REMOVE_CAREER:
+      return state.filter(sel => sel.id === action.id);
     default:
       return state;
   }
@@ -41,4 +58,5 @@ const count = (state = 0, action) => {
 export default combineReducers({
   careers,
   count,
+  csv,
 });

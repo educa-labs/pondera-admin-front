@@ -34,6 +34,14 @@ const Menu = styled.div`
 `;
 
 
+const createCSV = (rows) => {
+  const str = rows.reduce((rep, row) => (
+    `${rep}\n${row.cid};${row.ctitle};${row.utitle}`
+  ), 'id;CnombreCarrea;CnombreUniversidad');
+  return `data:application/octet-stream,${encodeURIComponent(str)}`;
+};
+
+
 const SideMenu = (props) => {
   const { pathname } = props.location;
   const url = `https://testapi.pondera.cl/api/v1/admin/excel?token=${props.token}`;
@@ -43,7 +51,9 @@ const SideMenu = (props) => {
         Ponderaciones
       </MenuItem>
       <SubMenu open={pathname === '/leads'}>
-        <MenuItem>Exportar CSV</MenuItem>
+        <MenuItem href={createCSV(props.csv)}>
+          Exportar CSV
+        </MenuItem>
       </SubMenu>
       {props.token && (
         <MenuItem href={url}>
@@ -56,4 +66,5 @@ const SideMenu = (props) => {
 
 export default withRouter(connect(state => ({
   token: state.token,
+  csv: state.careers.csv,
 }))(SideMenu));

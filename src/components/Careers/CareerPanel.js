@@ -40,7 +40,7 @@ const CareerPanel = ({
             if (is.inArray(car.cid, selectedCareers)) {
               dispatch(removeCareer(car.cid, car.count));
             } else {
-              dispatch(addCareer(car.cid, car.count));
+              dispatch(addCareer(car.cid, car.count, car.ctitle, car.utitle));
             }
           }}
         />
