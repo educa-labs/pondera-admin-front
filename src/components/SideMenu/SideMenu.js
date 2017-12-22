@@ -37,7 +37,7 @@ const Menu = styled.div`
 const createCSV = (rows) => {
   const str = rows.reduce((rep, row) => (
     `${rep}\n${row.cid};${row.ctitle};${row.utitle}`
-  ), 'id;CnombreCarrea;CnombreUniversidad');
+  ), 'id;nombreCarrea;nombreUniversidad');
   return `data:application/octet-stream,${encodeURIComponent(str)}`;
 };
 
@@ -50,7 +50,7 @@ const SideMenu = (props) => {
       <MenuItem linkTo="/leads">
         Ponderaciones
       </MenuItem>
-      <SubMenu open={pathname === '/leads'}>
+      <SubMenu open={pathname === '/leads' && props.token}>
         <MenuItem href={createCSV(props.csv)}>
           Exportar CSV
         </MenuItem>
