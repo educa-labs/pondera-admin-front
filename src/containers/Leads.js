@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getLeads, filteredLeads, nextPage } from '../redux/leads';
+import { getLeads, filteredLeads } from '../redux/leads';
 import { getUnivs } from '../redux/univs';
+import { getCount } from '../redux/count';
 import Layout from '../components/Layout/LeadsLayout';
 import Header from '../components/Leads/Header';
 import Panel from '../components/Univs/UniversityPanel';
@@ -24,6 +25,9 @@ class Leads extends Component {
     }
     if (!this.props.univs && this.props.token) {
       this.props.dispatch(getUnivs(this.props.token));
+    }
+    if (!this.props.userCount && this.props.token) {
+      this.props.dispatch(getCount(this.props.token));
     }
   }
 
@@ -54,11 +58,12 @@ class Leads extends Component {
       currentPage,
       token,
       loading,
+      userCount,
     } = this.props;
     if (!token) return <div>Debes ingresar para acceder</div>
     return (
       <Layout>
-        <Header count={count} selectedCareers={selectedCareers} />
+        <Header userCount={userCount} count={count} selectedCareers={selectedCareers} />
         <Panel />
         <SearchCareer dispatch={dispatch} />
         <CareerPanel
@@ -82,5 +87,6 @@ export default connect(state => ({
   token: state.token,
   selectedCareers: state.careers.careers,
   count: state.careers.count,
+  userCount: state.userCount.count,
   selections: state.query.selections,
 }))(Leads);

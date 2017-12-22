@@ -12,7 +12,7 @@ const createSession = data => (
 );
 
 const getAllLeads = token => (
-  request.get('admin/stats', {
+  request.get('/admin/stats', {
     headers: {
       Authorization: token,
     },
@@ -27,8 +27,15 @@ const getAllUnivs = token => (
   })
 );
 
+const getCount = token => (
+  request.get('/users/count', {
+    Authorization: token,
+  })
+);
+
 export default {
   createSession,
   getAllLeads,
   getAllUnivs,
+  getCount,
 };

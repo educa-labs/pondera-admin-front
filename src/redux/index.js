@@ -5,6 +5,7 @@ import careers from './careers';
 import session from './session';
 import leads from './leads';
 import univs from './univs';
+import count from './count';
 
 const loginForm = createFormReducer('loginForm', ['mail', 'password']);
 
@@ -14,5 +15,6 @@ export default combineReducers({
   loginForm,
   leads,
   univs,
+  userCount: count,
   token: session,
 });

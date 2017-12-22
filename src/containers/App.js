@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { Route, Switch, HashRouter as Router } from 'react-router-dom';
 import Login from './Login';
 import Leads from './Leads';
-import Summary from './Summary';
+// import Summary from './Summary';
 import SideMenu from '../components/SideMenu/SideMenu';
 import NavBar from '../components/NavigationBar';
 import Container from '../components/Layout/MainContainer';
@@ -44,7 +44,6 @@ class App extends Component {
             <Container open={this.state.open}>
               <Switch>
                 <Route path="/leads" component={Leads} />
-                <Route path="/summary" component={Summary} />
                 <Route path="/" component={Login} />
               </Switch>
             </Container>

@@ -39,9 +39,6 @@ const SideMenu = (props) => {
   const url = `https://testapi.pondera.cl/api/v1/admin/excel?token=${props.token}`;
   return (
     <Menu open={props.open}>
-      <MenuItem linkTo="/summary">
-        Resumen
-      </MenuItem>
       <MenuItem linkTo="/leads">
         Ponderaciones
       </MenuItem>

@@ -73,7 +73,7 @@ class Login extends Component {
   render() {
     const { email, password, errors } = this.props;
     const { loading, error } = this.state;
-    if (this.props.token) return <Redirect to="/summary" />;
+    if (this.props.token) return <Redirect to="/leads" />;
     return (
       <div>
         <Title>Ingresa como administrador</Title>
