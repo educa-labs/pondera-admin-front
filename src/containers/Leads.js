@@ -87,6 +87,6 @@ export default connect(state => ({
   token: state.token,
   selectedCareers: state.careers.careers,
   count: state.careers.count,
-  userCount: state.userCount.count,
+  userCount: state.userCount.data,
   selections: state.query.selections,
 }))(Leads);

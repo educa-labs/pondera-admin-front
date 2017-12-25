@@ -4769,8 +4769,8 @@ redux-duck-form@^0.3.0:
     redux-thunk "^2.2.0"
 
 redux-fetch-duck@^0.2.1:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/redux-fetch-duck/-/redux-fetch-duck-0.2.2.tgz#30c812174e733545b0689d2bf9fe3387a60fa0cb"
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/redux-fetch-duck/-/redux-fetch-duck-0.2.3.tgz#0e44ea9d5651d0a072996de95654eb35d3d082ba"
   dependencies:
     redux "^3.7.2"
 
