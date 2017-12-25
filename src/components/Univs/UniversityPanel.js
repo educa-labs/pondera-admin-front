@@ -65,5 +65,5 @@ class UniversityPanel extends Component {
 
 export default connect(state => ({
   selections: state.query.selections,
-  univs: state.univs.univs,
+  univs: state.univs.data,
 }))(UniversityPanel);
