@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 
 export const TOGGLE_SELECTION = 'TOGGLE_SELECTION';
 export const SET_FILTER_VALUE = 'SET_FILTER_VALUE';
+export const TOGGLE_SORT = 'TOGGLE_SORT';
 
 /* ACTION CREATORS */
 
@@ -11,11 +12,23 @@ export const toggleSelection = id => ({
   id,
 });
 
+export const toggleSort = () => ({
+  type: TOGGLE_SORT,
+});
+
 export const setFilterValue = value => ({
   type: SET_FILTER_VALUE,
   value,
 });
 
+const sort = (state = true, action) => {
+  switch (action.type) {
+    case TOGGLE_SORT:
+      return !state;
+    default:
+      return state;
+  }
+};
 
 const selections = (state = [], action) => {
   switch (action.type) {
@@ -41,4 +54,5 @@ const filter = (state = '', action) => {
 export default combineReducers({
   selections,
   filter,
+  sort,
 });

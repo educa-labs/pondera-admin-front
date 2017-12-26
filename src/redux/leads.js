@@ -15,6 +15,7 @@ export const getLeads = thunkCreator('leads', api.getAllLeads, dataSelector);
 const leadsSelector = state => state.leads.data || [];
 const selections = state => state.query.selections;
 const filter = state => state.query.filter;
+const sortSelector = state => state.query.sort;
 const pageSelector = state => state.leads.page;
 /**
  * Filtra los leads segun las universidades selecionadas: selections y el filtro aplicado
@@ -24,9 +25,16 @@ export const filteredLeads = createSelector(
   leadsSelector,
   selections,
   filter,
-  pageSelector,
-  (leads, selec, fil) => {
-    const result = leads.filter((item) => {
+  sortSelector,
+  (leads, selec, fil, sort) => {
+    let result = leads;
+    if (sort) {
+      result = result.sort((a, b) => {
+        if (Number(a.count) > Number(b.count)) return -1;
+        return 1;
+      });
+    }
+    result = result.filter((item) => {
       let inArray = true;
       if (is.not.empty(selec)) {
         inArray = is.inArray(item.uid, selec);
