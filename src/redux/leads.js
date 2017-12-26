@@ -5,7 +5,6 @@ import is from 'is_js';
 import api from '../api';
 import { TOGGLE_SELECTION, SET_FILTER_VALUE } from './query';
 
-
 /** THUNKS */
 const dataSelector = res => res.data.data;
 export const getLeads = thunkCreator('leads', api.getAllLeads, dataSelector);
@@ -38,9 +37,20 @@ export const filteredLeads = createSelector(
   },
 );
 
+export const leadsCount = createSelector(
+  leadsSelector,
+  data => data.reduce((sum, car) => (
+    sum + Number(car.count)
+  ), 0),
+);
+
 /* PAGE REDUCER */
-const fetchTypes = types('leads');
+
 const NEXT_PAGE = 'NEXT_PAGE';
+export const nextPage = () => ({
+  type: NEXT_PAGE,
+});
+const fetchTypes = types('leads');
 const page = (state = 0, action) => {
   switch (action.type) {
     case NEXT_PAGE:

@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../../styled/Card';
 
-const Header = ({ count, selectedCareers, userCount }) => (
+const Header = ({ count, leadsCount, userCount }) => (
   <Card>
     <div className="level">
       <div className="level-item has-text-centered">
@@ -12,8 +12,8 @@ const Header = ({ count, selectedCareers, userCount }) => (
       </div>
       <div className="level-item has-text-centered">
         <div>
-          <p className="heading">Carreras</p>
-          <p className="title">{selectedCareers ? selectedCareers.length : 0}</p>
+          <p className="heading">Ponderaciones</p>
+          <p className="title">{leadsCount}</p>
         </div>
       </div>
       <div className="level-item has-text-centered">

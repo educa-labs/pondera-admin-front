@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getLeads, filteredLeads } from '../redux/leads';
+import { getLeads, filteredLeads, leadsCount } from '../redux/leads';
 import { getUnivs } from '../redux/univs';
 import { getCount } from '../redux/count';
 import Layout from '../components/Layout/LeadsLayout';
@@ -39,6 +39,7 @@ class Leads extends Component {
 
   onRefresh() {
     this.props.dispatch(getLeads(this.props.token));
+    this.props.dispatch(getCount(this.props.token));
   }
 
   getCareers(currentPage) {
@@ -59,11 +60,17 @@ class Leads extends Component {
       token,
       loading,
       userCount,
+      leadsCount,
     } = this.props;
     if (!token) return <div>Debes ingresar para acceder</div>
     return (
       <Layout>
-        <Header userCount={userCount} count={count} selectedCareers={selectedCareers} />
+        <Header
+          userCount={userCount}
+          count={count}
+          selectedCareers={selectedCareers}
+          leadsCount={leadsCount}
+        />
         <Panel />
         <SearchCareer dispatch={dispatch} />
         <CareerPanel
@@ -89,4 +96,5 @@ export default connect(state => ({
   count: state.careers.count,
   userCount: state.userCount.data,
   selections: state.query.selections,
+  leadsCount: leadsCount(state),
 }))(Leads);

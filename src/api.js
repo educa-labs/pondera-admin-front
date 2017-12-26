@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: 'https://testapi.pondera.cl/api/v1',
+  baseURL: 'https://api.pondera.cl/api/v1',
   // withCredentials: true,
   responseType: 'json',
   timeout: 2000,
