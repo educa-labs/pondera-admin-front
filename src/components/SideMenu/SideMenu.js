@@ -51,7 +51,7 @@ const SideMenu = (props) => {
         Ponderaciones
       </MenuItem>
       <SubMenu open={pathname === '/leads' && props.token}>
-        <MenuItem href={createCSV(props.csv)}>
+        <MenuItem download="pondera.csv" href={createCSV(props.csv)}>
           Exportar CSV
         </MenuItem>
       </SubMenu>

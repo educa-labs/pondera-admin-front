@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import t from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { removeToken } from '../redux/session';
+import { getLeads } from '../redux/leads';
+import { getCount } from '../redux/count';
 import media from '../styled/media';
 import Logo from '../svg/logo.svg';
 
@@ -73,36 +75,54 @@ const Iconbutton = styled.div`
 `;
 
 
-const NavigationBar = props => (
-  <NavBar>
-    <Header>
-      <Link to="/"><Logo height={30} width={120} /></Link>
-    </Header>
-    <Body>
-      <Left>
-        <OnlyMobile>
-          <Iconbutton onClick={props.toggleSideMenu}>
-            <i className="fa fa-bars" aria-hidden="true" />
-          </Iconbutton>
-        </OnlyMobile>
-      </Left>
-      <Right>
-        {props.token ? (
-          <button
-            className="button is-primary"
-            onClick={() => {
-              props.dispatch(removeToken());
-            }}
-          >
-          Salir
-          </button>
-        ) : (
-          <Link to="/" className="button is-primary">Log In</Link>
-        )}
-      </Right>
-    </Body>
-  </NavBar>
-);
+const NavigationBar = (props) => {
+  const onRefresh = () => {
+    props.dispatch(getLeads(props.token));
+    props.dispatch(getCount(props.token));
+  };
+
+  return (
+    <NavBar>
+      <Header>
+        <Link to="/"><Logo height={30} width={120} /></Link>
+      </Header>
+      <Body>
+        <Left>
+          <OnlyMobile>
+            <Iconbutton onClick={props.toggleSideMenu}>
+              <i className="fa fa-bars" aria-hidden="true" />
+            </Iconbutton>
+          </OnlyMobile>
+        </Left>
+        <Right>
+          {props.token ? (
+            <Fragment>
+              <button
+                onClick={onRefresh}
+                className={`button is-primary ${props.loading ? 'is-loading' : ''}`}
+              >
+                <span className="icon">
+                  <i className="fa fa-refresh" />
+                </span>
+                <span>Actualizar</span>
+              </button>
+              <button
+                className="button is-primary"
+                onClick={() => {
+                  props.dispatch(removeToken());
+                }}
+              >
+              Salir
+              </button>
+            </Fragment>
+          ) : (
+            <Link to="/" className="button is-primary">Log In</Link>
+          )}
+        </Right>
+      </Body>
+    </NavBar>
+  );
+};
 
 NavigationBar.propTypes = {
   toggleSideMenu: t.func.isRequired,
@@ -110,4 +130,5 @@ NavigationBar.propTypes = {
 
 export default withRouter(connect(state => ({
   token: state.token,
+  loading: state.leads.loading,
 }))(NavigationBar));

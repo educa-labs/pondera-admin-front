@@ -36,7 +36,7 @@ const Label = styled.div`
 `;
 
 const MenuItem = ({
-  linkTo, active, children, location, href
+  linkTo, active, children, location, href, download
 }) => {
   const labelEl = (
     <Label active={location.pathname === linkTo}>
@@ -52,7 +52,7 @@ const MenuItem = ({
   }
   if (href) {
     return (
-      <a href={href}>
+      <a download={download} href={href}>
         {labelEl}
       </a>
     );
